@@ -21,6 +21,7 @@ public class PortfolioDto {
 	String email;
 	String assunto;
 	String mensagem;
+	String path;
 	
 	String message;	
 	LocalDate dtLimite;

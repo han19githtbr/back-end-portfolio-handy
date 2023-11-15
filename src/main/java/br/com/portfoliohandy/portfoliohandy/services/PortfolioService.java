@@ -2,6 +2,7 @@ package br.com.portfoliohandy.portfoliohandy.services;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.ParseException;
@@ -50,12 +51,79 @@ public class PortfolioService {
 		
 		portfolioRepository.save(portfolioModel);
 		
-		this.enviarEmailService.enviar(meuEmail, EmailMessage.createTitle(portfolioModel), EmailMessage.messageToNewUser(portfolioModel));
+		this.enviarEmailService.enviar(meuEmail, EmailMessage.createTitle(), EmailMessage.messageToNewUser(portfolioModel));
 		
 		portfolio.setId(portfolioModel.getId());
 		portfolio.setNome(portfolioModel.getNome());
 		
 		portfolio.setSuccess(Boolean.TRUE);
+		
+		return portfolio;
+	}
+	
+	
+	public PortfolioDto baixarCurriculo(String idioma) throws IOException {
+		
+		String meuEmail = "milliance23@gmail.com";
+		
+		String idiomaCv = obterIdioma(idioma);
+		
+		PortfolioDto portfolio = new PortfolioDto();
+		
+		this.enviarEmailService.enviar(meuEmail, EmailMessage.createTitle(), EmailMessage.messageToUser(idiomaCv));
+		
+		portfolio.setSuccess(Boolean.TRUE);
+		
+		return portfolio;
+	}
+	
+	
+	public String obterIdioma(String idioma) {
+		switch (idioma) {
+			case "pt-br":
+				return "Português";
+			case "en":
+				return "Inglês";
+			case "fr":
+				return "Francês";
+			default:
+	            return "Português";
+		}
+	}
+	
+	
+	public PortfolioDto savePicture(PortfolioModel portfolioModel) throws ParseException {
+		
+		PortfolioDto portfolio = new PortfolioDto();
+		
+		Long id = 2L;
+		
+		if(portfolioModel.getPath() != null) {
+			
+			PortfolioModel portfolioM = portfolioRepository.getById(2L);
+			
+			portfolioM.setPath(portfolioModel.getPath());
+			
+			portfolioRepository.save(portfolioM);
+			
+			portfolio.setId(portfolioM.getId());
+			portfolio.setPath(portfolioM.getPath());
+			
+			portfolio.setSuccess(Boolean.TRUE);
+		} else {
+			portfolio.setSuccess(Boolean.FALSE);
+		}
+		
+		return portfolio;
+	}
+	
+	public PortfolioDto pegarFoto(Long id) {
+		PortfolioDto portfolio = new PortfolioDto();
+		
+		PortfolioModel portfolioModel = portfolioRepository.getById(id);
+		
+		portfolio.setId(portfolioModel.getId());
+		portfolio.setPath(portfolioModel.getPath());
 		
 		return portfolio;
 	}

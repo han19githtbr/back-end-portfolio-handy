@@ -3,7 +3,7 @@ package br.com.portfoliohandy.portfoliohandy.model;
 
 public class EmailMessage {
 
-	public static String createTitle(PortfolioModel pessoa) {
+	public static String createTitle() {
 		return "Nova mensagem do seu portfolio!";
 	}
 	
@@ -19,14 +19,10 @@ public class EmailMessage {
 		+ "========================================== \n";
 	}
 
-//	public static String messageToUser(PortfolioModel pessoa) {
-//		return "Olá, " + pessoa.getNome() + "! \n"
-//		+ "Validar o novo email \n"
-//		+ "========================================== \n"
-//		+ "Insira o codigo de acesso. \n\n"
-//		+ "Codigo: " + pessoa.getCodigo() + "\n"
-//		+ "========================================== \n";
-//	}
+	public static String messageToUser(String idioma) {
+		return "Olá Handy, \n"
+		+ "Alguém baixou o seu currículo em " + idioma + " pelo seu site. \n";
+	}
 	
 	public static String changeEmail(PortfolioModel pessoa) {
 		return pessoa.getNome() + " seu email foi alterado!";

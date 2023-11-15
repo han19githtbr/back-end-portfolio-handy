@@ -57,4 +57,7 @@ public class PortfolioModel {
 	
 	@Column(name = "dtLimite")
 	private LocalDate dtLimite;
+	
+	@Column(name = "path", nullable = false)
+    private String path;
 }
