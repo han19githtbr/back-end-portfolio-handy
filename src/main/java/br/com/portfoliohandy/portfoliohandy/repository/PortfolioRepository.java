@@ -14,5 +14,5 @@ public interface PortfolioRepository extends JpaRepository<PortfolioModel, Long>
 
 	@Query(nativeQuery = true, value = "SELECT * FROM portfolio as por \n" +
             " where por.nome = :nome ")
-	PortfolioModel checkNameTask(@Param("nome") String nome);
+	PortfolioModel checkName(@Param("nome") String nome);
 }

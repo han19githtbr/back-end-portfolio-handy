@@ -94,13 +94,12 @@ public class PortfolioService {
 	
 	public PortfolioDto savePicture(PortfolioModel portfolioModel) throws ParseException {
 		
-		PortfolioDto portfolio = new PortfolioDto();
+		PortfolioDto portfolio = new PortfolioDto();	
 		
-		Long id = 2L;
+
+		PortfolioModel portfolioM = portfolioRepository.checkName(portfolioModel.getNome());
 		
-		if(portfolioModel.getPath() != null) {
-			
-			PortfolioModel portfolioM = portfolioRepository.getById(2L);
+		if(Objects.nonNull(portfolioM)) {	
 			
 			portfolioM.setPath(portfolioModel.getPath());
 			
@@ -111,16 +110,18 @@ public class PortfolioService {
 			
 			portfolio.setSuccess(Boolean.TRUE);
 		} else {
-			portfolio.setSuccess(Boolean.FALSE);
+			portfolioRepository.save(portfolioModel);
+			
+			portfolio.setSuccess(Boolean.TRUE);
 		}
 		
 		return portfolio;
 	}
 	
-	public PortfolioDto pegarFoto(Long id) {
+	public PortfolioDto pegarFoto(String nome) {
 		PortfolioDto portfolio = new PortfolioDto();
 		
-		PortfolioModel portfolioModel = portfolioRepository.getById(id);
+		PortfolioModel portfolioModel = portfolioRepository.checkName(nome);
 		
 		portfolio.setId(portfolioModel.getId());
 		portfolio.setPath(portfolioModel.getPath());

@@ -68,9 +68,9 @@ public class PortfolioController {
 		return task;
 	}
 	
-	@GetMapping("/pegarFoto/{id}")
-	public PortfolioDto pegarFoto(@PathVariable("id") Long id, HttpServletRequest request) throws ParseException{
-		PortfolioDto task = portfolioService.pegarFoto(id);
+	@GetMapping("/pegarFoto/{nome}")
+	public PortfolioDto pegarFoto(@PathVariable("nome") String nome, HttpServletRequest request) throws ParseException{
+		PortfolioDto task = portfolioService.pegarFoto(nome);
 		return task;
 	}
 
