@@ -78,6 +78,22 @@ public class PortfolioService {
 	}
 	
 	
+	public PortfolioDto baixarCertificado(String idioma) throws IOException {
+		
+		String meuEmail = "milliance23@gmail.com";
+		
+		String idiomaCertificado = obterIdioma(idioma);
+		
+		PortfolioDto portfolio = new PortfolioDto();
+		
+		this.enviarEmailService.enviar(meuEmail, EmailMessage.createTitle(), EmailMessage.messageToUser(idiomaCertificado));
+		
+		portfolio.setSuccess(Boolean.TRUE);
+		
+		return portfolio;
+	}
+	
+	
 	public String obterIdioma(String idioma) {
 		switch (idioma) {
 			case "pt-br":

@@ -105,6 +105,40 @@ public class PortfolioController {
 		}
 	}
 
+	
+	@GetMapping("/downloadCertificado/{idioma}")
+	public ResponseEntity<ByteArrayResource> downloadCertificado(
+			@PathVariable("idioma") String idioma,
+			HttpServletResponse response) throws IOException {
+		String nomeArquivo = obterNomeCertificado(idioma);
+		String caminhoCER = "certificado/" + idioma + "/" + nomeArquivo;
+
+		try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(caminhoCER)) {
+			if (inputStream == null) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+			}
+
+			byte[] arquivoBytes = IOUtils.toByteArray(inputStream);
+
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_PDF);
+			headers.setContentDispositionFormData("attachment", nomeArquivo);
+
+			// Configurando Cache-Control para forçar a revalidaçao
+			headers.setCacheControl("no-cache, no-store, must-revalidate");
+			headers.setPragma("no-cache");
+			headers.setExpires(0);
+
+			PortfolioDto downloadCertificado = portfolioService.baixarCertificado(idioma);
+
+			return ResponseEntity.ok().headers(headers).body(new ByteArrayResource(arquivoBytes));
+		} catch (IOException e) {
+			// Log de erro ou tratamento adequado
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+	}
+
+	
 	private String obterNomeArquivo(String idioma) {
 		switch (idioma) {
 			case "pt-br":
@@ -117,4 +151,20 @@ public class PortfolioController {
 				return "CV_HANDY_BR.pdf";
 		}
 	}
+
+	
+	private String obterNomeCertificado(String idioma) {
+		switch (idioma) {
+			case "pt-br":
+				return "BOOTCAMP_DIO_FINALIZADO.pdf" + "Certificado_Full_Stack.pdf" + "certificado_trilha_rocketseat.pdf";
+			case "en":
+				return "BOOTCAMP_DIO_FINALIZADO.pdf" + "Certificado_Full_Stack.pdf" + "certificado_trilha_rocketseat.pdf";
+			case "fr":
+				return "BOOTCAMP_DIO_FINALIZADO.pdf" + "Certificado_Full_Stack.pdf" + "certificado_trilha_rocketseat.pdf";
+			default:
+				return "BOOTCAMP_DIO_FINALIZADO.pdf" + "Certificado_Full_Stack.pdf" + "certificado_trilha_rocketseat.pdf";
+		}
+	}
+
+
 }
