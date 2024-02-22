@@ -156,7 +156,7 @@ public class PortfolioController {
 	private String obterNomeCertificado(String idioma) {
 		switch (idioma) {
 			case "pt-br":
-				return "BOOTCAMP_DIO_FINALIZADO.pdf";
+				return "BOOTCAMP_DIO_FINALIZADO.pdf" + "Certificado_Full_Stack.pdf" + "certificado_trilha_rocketseat.pdf";
 			case "en":
 				return "BOOTCAMP_DIO_FINALIZADO.pdf" + "Certificado_Full_Stack.pdf" + "certificado_trilha_rocketseat.pdf";
 			case "fr":
