@@ -165,6 +165,4 @@ public class PortfolioController {
 				return "BOOTCAMP_DIO_FINALIZADO.pdf" + "Certificado_Full_Stack.pdf" + "certificado_trilha_rocketseat.pdf";
 		}
 	}
-
-
 }
