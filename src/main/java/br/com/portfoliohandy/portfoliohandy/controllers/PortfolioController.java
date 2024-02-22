@@ -111,7 +111,7 @@ public class PortfolioController {
 			@PathVariable("idioma") String idioma,
 			HttpServletResponse response) throws IOException {
 		String nomeArquivo = obterNomeCertificado(idioma);
-		String caminhoCER = "certificado/" + idioma + "/" + nomeArquivo;
+		String caminhoCER = "curriculo/" + idioma + "/" + nomeArquivo;
 
 		try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(caminhoCER)) {
 			if (inputStream == null) {
@@ -142,7 +142,7 @@ public class PortfolioController {
 	private String obterNomeArquivo(String idioma) {
 		switch (idioma) {
 			case "pt-br":
-				return "CV_HANDY_BR.pdf" + "CV_HANDY_EN.pdf" + "CV_HANDY_FR.pdf";
+				return "CV_HANDY_BR.pdf";
 			case "en":
 				return "CV_HANDY_EN.pdf";
 			case "fr":
