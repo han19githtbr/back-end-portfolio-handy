@@ -142,7 +142,7 @@ public class PortfolioController {
 	private String obterNomeArquivo(String idioma) {
 		switch (idioma) {
 			case "pt-br":
-				return "CV_HANDY_BR.pdf";
+				return "CV_HANDY_BR.pdf" + "CV_HANDY_EN.pdf" + "CV_HANDY_FR.pdf";
 			case "en":
 				return "CV_HANDY_EN.pdf";
 			case "fr":
