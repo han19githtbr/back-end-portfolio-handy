@@ -42,8 +42,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/portfolio")
-// @CrossOrigin(origins = { "http://localhost:4200", "http://localhost" },
-// maxAge = 3600)
+//@CrossOrigin(origins = { "http://localhost:4200", "http://localhost" }, maxAge = 3600)
 @CrossOrigin(origins = { "https://portfolio-handy.netlify.app/" }, maxAge = 3600)
 
 public class PortfolioController {
